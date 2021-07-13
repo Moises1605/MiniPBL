@@ -1,0 +1,1 @@
+#Classe responsável pela sincronização

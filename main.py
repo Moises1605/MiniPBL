@@ -1,4 +1,5 @@
 #Classe que vai iniciar os "processos"
+from file_manipulation.Directory import Directory
 from file_manipulation.Controller import Controller
 from file_manipulation.Writer import Writer
 from os import pipe
@@ -11,10 +12,11 @@ class main:
     #semaphore_reader = threading.Semaphore(1) #Semáforo de leitura
     #semaphore_whiter = threading.Semaphore(1) #Semáforo de escrita 
     #readers = 0
-    #directiry = "./archives/"; 
-    archive = 0
-
+    directory = Directory(); 
+    archive = ""
     controller = Controller()
+    contador = 0
+    controle = True
 
     #Criação das threads - Escolha do tipo de processo e o arquivo
 
@@ -31,16 +33,16 @@ class main:
     #reader5 = threading.Thread(target = Reader.read,name = "5", args=(5,archive,semaphore_reader,semaphore_whiter,readers))
 
     #Escritores
-    writer1 = threading.Thread(target = Writer.write,name = "1", args=(controller,archive))
-    writer2 = threading.Thread(target = Writer.write,name = "2", args=(controller,archive))
-    writer3 = threading.Thread(target = Writer.write,name = "3", args=(controller,archive))
+    writer1 = threading.Thread(target = Writer.write,name = "1", args=(controller,archive,directory))
+    writer2 = threading.Thread(target = Writer.write,name = "2", args=(controller,archive,directory))
+    writer3 = threading.Thread(target = Writer.write,name = "3", args=(controller,archive,directory))
 
     #Leitores
-    reader1 = threading.Thread(target = Reader.read,name = "1", args=(controller,archive))
-    reader2 = threading.Thread(target = Reader.read,name = "2", args=(controller,archive))
-    reader3 = threading.Thread(target = Reader.read,name = "3", args=(controller,archive))
-    reader4 = threading.Thread(target = Reader.read,name = "4", args=(controller,archive))
-    reader5 = threading.Thread(target = Reader.read,name = "5", args=(controller,archive))
+    reader1 = threading.Thread(target = Reader.read,name = "1", args=(controller,archive,directory))
+    reader2 = threading.Thread(target = Reader.read,name = "2", args=(controller,archive,directory))
+    reader3 = threading.Thread(target = Reader.read,name = "3", args=(controller,archive,directory))
+    reader4 = threading.Thread(target = Reader.read,name = "4", args=(controller,archive,directory))
+    reader5 = threading.Thread(target = Reader.read,name = "5", args=(controller,archive,directory))
 
 
     #Iniciando as threads
@@ -52,3 +54,11 @@ class main:
     reader3.start()
     reader4.start()
     reader5.start()
+
+    #Criando processos aleatorios
+    #while(controle):
+    #    contador +=1
+    #    if(contador > 50):
+    #        controle = False
+
+    

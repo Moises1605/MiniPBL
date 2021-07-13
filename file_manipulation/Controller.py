@@ -12,7 +12,7 @@ class Controller:
     
     def block_readers(self):
         self.semaphore_reader.acquire() # bloqueia os leitores
-        self.readers + 1 #soma a quantidade de leitores
+        self.readers += 1 #soma a quantidade de leitores
         if self.readers == 1:
             self.semaphore_writer.acquire() #bloqueia os escritores
         self.semaphore_reader.release() # desbloqueia os leitores
@@ -22,7 +22,7 @@ class Controller:
 
     def release_readers(self):
         self.semaphore_reader.acquire()
-        self.readers - 1 #subtrai a quantidade de leitores
+        self.readers -= 1 #subtrai a quantidade de leitores
         if self.readers == 0:
             self.semaphore_writer.release() # desbloqueia os escritores
         self.semaphore_reader.release() # desbloqueia os leitores
